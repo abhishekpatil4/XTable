@@ -44,7 +44,29 @@ function App() {
     setData(newArr);
   }
   const sortByViews = () => {
-
+    const s = data.length;
+    const newArr = [...data];
+    for (let i = 0; i < s - 1; i++) {
+      for (let j = 0; j < s - i - 1; j++) {
+        //if views are same
+        if (newArr[j].views === newArr[j + 1].views) {
+          const d1 = new Date(newArr[j].date);
+          const d2 = new Date(newArr[j + 1].date);
+          if (d1 < d2) {
+            let temp = newArr[j];
+            newArr[j] = newArr[j + 1];
+            newArr[j + 1] = temp;
+          }
+        } else {
+          if (newArr[j].views < newArr[j + 1].views) {
+            let temp = newArr[j];
+            newArr[j] = newArr[j + 1];
+            newArr[j + 1] = temp;
+          }
+        }
+      }
+    }
+    setData(newArr);
   }
   return <div>
     <h1>Date and Views Table</h1>
